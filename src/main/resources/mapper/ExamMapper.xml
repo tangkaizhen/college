@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanhe.college.dao.ExamMapper" >
+  <resultMap id="BaseResultMap" type="com.hanhe.college.entity.Exam" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="admin_id" property="adminId" jdbcType="BIGINT" />
+    <result column="user_type_id" property="userTypeId" jdbcType="BIGINT" />
+    <result column="uav_type_id" property="uavTypeId" jdbcType="BIGINT" />
+    <result column="course_category_id" property="courseCategoryId" jdbcType="BIGINT" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
+    <result column="uav_type" property="uavType" jdbcType="VARCHAR" />
+    <result column="course_category" property="courseCategory" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="per_mark" property="perMark" jdbcType="INTEGER" />
+    <result column="total_count" property="totalCount" jdbcType="INTEGER" />
+    <result column="total_mark" property="totalMark" jdbcType="INTEGER" />
+    <result column="pass_mark" property="passMark" jdbcType="INTEGER" />
+    <result column="single_count" property="singleCount" jdbcType="INTEGER" />
+    <result column="single_mark" property="singleMark" jdbcType="INTEGER" />
+    <result column="multi_count" property="multiCount" jdbcType="INTEGER" />
+    <result column="multi_mark" property="multiMark" jdbcType="INTEGER" />
+    <result column="judge_count" property="judgeCount" jdbcType="INTEGER" />
+    <result column="judge_mark" property="judgeMark" jdbcType="INTEGER" />
+    <result column="set_time" property="setTime" jdbcType="INTEGER" />
+    <result column="size" property="size" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, admin_id, user_type_id, uav_type_id, course_category_id, user_type, uav_type, 
+    course_category, name, type, per_mark, total_count, total_mark, pass_mark, single_count, 
+    single_mark, multi_count, multi_mark, judge_count, judge_mark, set_time, size, state, 
+    operator, operate_time, operate_ip
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from college_exam
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from college_exam
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hanhe.college.entity.Exam" >
+    insert into college_exam (id, admin_id, user_type_id, 
+      uav_type_id, course_category_id, user_type, 
+      uav_type, course_category, name, 
+      type, per_mark, total_count, 
+      total_mark, pass_mark, single_count, 
+      single_mark, multi_count, multi_mark, 
+      judge_count, judge_mark, set_time, 
+      size, state, operator, 
+      operate_time, operate_ip)
+    values (#{id,jdbcType=BIGINT}, #{adminId,jdbcType=BIGINT}, #{userTypeId,jdbcType=BIGINT}, 
+      #{uavTypeId,jdbcType=BIGINT}, #{courseCategoryId,jdbcType=BIGINT}, #{userType,jdbcType=VARCHAR}, 
+      #{uavType,jdbcType=VARCHAR}, #{courseCategory,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{perMark,jdbcType=INTEGER}, #{totalCount,jdbcType=INTEGER}, 
+      #{totalMark,jdbcType=INTEGER}, #{passMark,jdbcType=INTEGER}, #{singleCount,jdbcType=INTEGER}, 
+      #{singleMark,jdbcType=INTEGER}, #{multiCount,jdbcType=INTEGER}, #{multiMark,jdbcType=INTEGER}, 
+      #{judgeCount,jdbcType=INTEGER}, #{judgeMark,jdbcType=INTEGER}, #{setTime,jdbcType=INTEGER}, 
+      #{size,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{operator,jdbcType=VARCHAR}, 
+      #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.hanhe.college.entity.Exam" >
+    insert into college_exam
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="userTypeId != null" >
+        user_type_id,
+      </if>
+      <if test="uavTypeId != null" >
+        uav_type_id,
+      </if>
+      <if test="courseCategoryId != null" >
+        course_category_id,
+      </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
+      <if test="uavType != null" >
+        uav_type,
+      </if>
+      <if test="courseCategory != null" >
+        course_category,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="perMark != null" >
+        per_mark,
+      </if>
+      <if test="totalCount != null" >
+        total_count,
+      </if>
+      <if test="totalMark != null" >
+        total_mark,
+      </if>
+      <if test="passMark != null" >
+        pass_mark,
+      </if>
+      <if test="singleCount != null" >
+        single_count,
+      </if>
+      <if test="singleMark != null" >
+        single_mark,
+      </if>
+      <if test="multiCount != null" >
+        multi_count,
+      </if>
+      <if test="multiMark != null" >
+        multi_mark,
+      </if>
+      <if test="judgeCount != null" >
+        judge_count,
+      </if>
+      <if test="judgeMark != null" >
+        judge_mark,
+      </if>
+      <if test="setTime != null" >
+        set_time,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="operateIp != null" >
+        operate_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="userTypeId != null" >
+        #{userTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="uavTypeId != null" >
+        #{uavTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="courseCategoryId != null" >
+        #{courseCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="uavType != null" >
+        #{uavType,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCategory != null" >
+        #{courseCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="perMark != null" >
+        #{perMark,jdbcType=INTEGER},
+      </if>
+      <if test="totalCount != null" >
+        #{totalCount,jdbcType=INTEGER},
+      </if>
+      <if test="totalMark != null" >
+        #{totalMark,jdbcType=INTEGER},
+      </if>
+      <if test="passMark != null" >
+        #{passMark,jdbcType=INTEGER},
+      </if>
+      <if test="singleCount != null" >
+        #{singleCount,jdbcType=INTEGER},
+      </if>
+      <if test="singleMark != null" >
+        #{singleMark,jdbcType=INTEGER},
+      </if>
+      <if test="multiCount != null" >
+        #{multiCount,jdbcType=INTEGER},
+      </if>
+      <if test="multiMark != null" >
+        #{multiMark,jdbcType=INTEGER},
+      </if>
+      <if test="judgeCount != null" >
+        #{judgeCount,jdbcType=INTEGER},
+      </if>
+      <if test="judgeMark != null" >
+        #{judgeMark,jdbcType=INTEGER},
+      </if>
+      <if test="setTime != null" >
+        #{setTime,jdbcType=INTEGER},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null" >
+        #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanhe.college.entity.Exam" >
+    update college_exam
+    <set >
+      <if test="adminId != null" >
+        admin_id = #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="userTypeId != null" >
+        user_type_id = #{userTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="uavTypeId != null" >
+        uav_type_id = #{uavTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="courseCategoryId != null" >
+        course_category_id = #{courseCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="userType != null" >
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="uavType != null" >
+        uav_type = #{uavType,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCategory != null" >
+        course_category = #{courseCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="perMark != null" >
+        per_mark = #{perMark,jdbcType=INTEGER},
+      </if>
+      <if test="totalCount != null" >
+        total_count = #{totalCount,jdbcType=INTEGER},
+      </if>
+      <if test="totalMark != null" >
+        total_mark = #{totalMark,jdbcType=INTEGER},
+      </if>
+      <if test="passMark != null" >
+        pass_mark = #{passMark,jdbcType=INTEGER},
+      </if>
+      <if test="singleCount != null" >
+        single_count = #{singleCount,jdbcType=INTEGER},
+      </if>
+      <if test="singleMark != null" >
+        single_mark = #{singleMark,jdbcType=INTEGER},
+      </if>
+      <if test="multiCount != null" >
+        multi_count = #{multiCount,jdbcType=INTEGER},
+      </if>
+      <if test="multiMark != null" >
+        multi_mark = #{multiMark,jdbcType=INTEGER},
+      </if>
+      <if test="judgeCount != null" >
+        judge_count = #{judgeCount,jdbcType=INTEGER},
+      </if>
+      <if test="judgeMark != null" >
+        judge_mark = #{judgeMark,jdbcType=INTEGER},
+      </if>
+      <if test="setTime != null" >
+        set_time = #{setTime,jdbcType=INTEGER},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null" >
+        operate_ip = #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanhe.college.entity.Exam" >
+    update college_exam
+    set admin_id = #{adminId,jdbcType=BIGINT},
+      user_type_id = #{userTypeId,jdbcType=BIGINT},
+      uav_type_id = #{uavTypeId,jdbcType=BIGINT},
+      course_category_id = #{courseCategoryId,jdbcType=BIGINT},
+      user_type = #{userType,jdbcType=VARCHAR},
+      uav_type = #{uavType,jdbcType=VARCHAR},
+      course_category = #{courseCategory,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      per_mark = #{perMark,jdbcType=INTEGER},
+      total_count = #{totalCount,jdbcType=INTEGER},
+      total_mark = #{totalMark,jdbcType=INTEGER},
+      pass_mark = #{passMark,jdbcType=INTEGER},
+      single_count = #{singleCount,jdbcType=INTEGER},
+      single_mark = #{singleMark,jdbcType=INTEGER},
+      multi_count = #{multiCount,jdbcType=INTEGER},
+      multi_mark = #{multiMark,jdbcType=INTEGER},
+      judge_count = #{judgeCount,jdbcType=INTEGER},
+      judge_mark = #{judgeMark,jdbcType=INTEGER},
+      set_time = #{setTime,jdbcType=INTEGER},
+      size = #{size,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      operator = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{operateIp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="list" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM college_exam
+    WHERE state = 1
+    <if test="userTypeId != null and userTypeId != 0" >
+      AND user_type_id = #{userTypeId}
+    </if>
+    <if test="uavTypeId != null and uavTypeId != 0" >
+      AND uav_type_id = #{uavTypeId}
+    </if>
+    <if test="courseCategoryId != null and courseCategoryId != 0" >
+      AND course_category_id = #{courseCategoryId}
+    </if>
+    ORDER BY operate_time DESC
+  </select>
+  <select id="checkExist" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM  college_exam
+    WHERE type = #{type} AND user_type_id = #{userTypeId} AND uav_type_id = #{uavTypeId} AND state = 1
+    <if test="courseCategoryId != null and courseCategoryId != 0" >
+      AND course_category_id = #{courseCategoryId}
+    </if>
+    <if test="id != null" >
+      AND id != #{id}
+    </if>
+  </select>
+  <resultMap id="ExamDTOMap" type="com.hanhe.college.dto.ExamDTO" extends="BaseResultMap">
+    <result column="success" property="passExam" jdbcType="BIT" />
+  </resultMap>
+  <select id="getExamList" resultMap="ExamDTOMap">
+    SELECT
+    e.id, e.user_type_id, e.uav_type_id, e.course_category_id, e.course_category, e.name, e.type, e.per_mark, e.total_count, e.total_mark, e.set_time
+    FROM college_exam e
+    WHERE e.state = 1 AND e.user_type_id = #{userTypeId} AND e.uav_type_id = #{uavTypeId}
+    ORDER BY e.type ASC, e.id ASC
+  </select>
+  <update id="increaseSize">
+    UPDATE college_exam
+    SET size = size + 1
+    WHERE id = #{id}
+  </update>
+  <update id="decreaseSize">
+    UPDATE college_exam
+    SET size = size - 1
+    WHERE id = #{id}
+  </update>
+  <select id="isExist" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM  college_exam
+    WHERE state = 1
+    <if test="userTypeId != null and userTypeId != 0" >
+      AND user_type_id = #{userTypeId}
+    </if>
+    <if test="uavTypeId != null and uavTypeId != 0" >
+      AND uav_type_id = #{uavTypeId}
+    </if>
+    <if test="courseCategoryId != null and courseCategoryId != 0" >
+      AND course_category_id = #{courseCategoryId}
+    </if>
+  </select>
+</mapper>

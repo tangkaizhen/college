@@ -1,0 +1,10 @@
+*.class
+*.iml
+.idea
+target
+catalina.home_IS_UNDEFINED
+src/test
+.settings
+.project
+.classpath
+.tern-project

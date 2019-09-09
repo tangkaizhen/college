@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanhe.college.dao.TrainingSiteTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.hanhe.college.entity.TrainingSiteType" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="training_site_id" property="trainingSiteId" jdbcType="BIGINT" />
+    <result column="training_type_id" property="trainingTypeId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, training_site_id, training_type_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from college_training_site_type
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from college_training_site_type
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hanhe.college.entity.TrainingSiteType" >
+    insert into college_training_site_type (id, training_site_id, training_type_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{trainingSiteId,jdbcType=BIGINT}, #{trainingTypeId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanhe.college.entity.TrainingSiteType" >
+    insert into college_training_site_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="trainingSiteId != null" >
+        training_site_id,
+      </if>
+      <if test="trainingTypeId != null" >
+        training_type_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="trainingSiteId != null" >
+        #{trainingSiteId,jdbcType=BIGINT},
+      </if>
+      <if test="trainingTypeId != null" >
+        #{trainingTypeId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanhe.college.entity.TrainingSiteType" >
+    update college_training_site_type
+    <set >
+      <if test="trainingSiteId != null" >
+        training_site_id = #{trainingSiteId,jdbcType=BIGINT},
+      </if>
+      <if test="trainingTypeId != null" >
+        training_type_id = #{trainingTypeId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanhe.college.entity.TrainingSiteType" >
+    update college_training_site_type
+    set training_site_id = #{trainingSiteId,jdbcType=BIGINT},
+      training_type_id = #{trainingTypeId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    insert into college_training_site_type(training_site_id, training_type_id)
+    values
+    <foreach collection="trainingSiteTypeList" item="trainingSiteType" separator=",">
+      (#{trainingSiteType.trainingSiteId}, #{trainingSiteType.trainingTypeId})
+    </foreach>
+  </insert>
+  <select id="getByTrainingSiteId" resultType="long">
+    SELECT training_type_id
+    FROM college_training_site_type
+    WHERE training_site_id = #{trainingSiteId}
+  </select>
+  <delete id="deleteByTrainingSiteId" parameterType="long">
+    DELETE FROM college_training_site_type
+    WHERE training_site_id = #{trainingSiteId}
+  </delete>
+  <resultMap id="trainingTypeDTOMap" type="com.hanhe.college.dto.TrainingTypeDTO">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="pass" property="pass" jdbcType="BIT" />
+  </resultMap>
+  <select id="getAvailableTrainingTypes" resultMap="trainingTypeDTOMap">
+    SELECT tt.id, tt.name, IFNULL(er.success,0) AS pass
+    FROM college_training_site_type tst
+    JOIN college_training_type tt ON tst.training_type_id = tt.id
+    LEFT JOIN college_exam_result er ON (tt.user_type_id = er.user_type_id AND tt.uav_type_id = er.uav_type_id AND er.type = 2 AND er.success = 1)
+    WHERE tst.training_site_id = #{trainingSiteId} AND er.user_id = #{userId}
+    GROUP BY tt.id
+    ORDER BY pass DESC, tt.id ASC
+  </select>
+  <select id="isAvailable" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM college_training_site_type tst
+    JOIN college_training_type tt ON tst.training_type_id = tt.id
+    LEFT JOIN college_exam_result er ON (tt.user_type_id = er.user_type_id AND tt.uav_type_id = er.uav_type_id AND er.type = 2)
+    WHERE tst.training_site_id = #{trainingSiteId} AND tst.training_type_id = #{trainingTypeId} AND er.user_id = #{userId} AND er.success = 1
+  </select>
+  <select id="isExist" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM  college_training_site_type
+    WHERE training_type_id = #{trainingTypeId}
+  </select>
+</mapper>

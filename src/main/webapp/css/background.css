@@ -1,0 +1,98 @@
+/*顶部样式*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
+*{
+    font-family:微软雅黑;
+    box-sizing:border-box}
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+body { background:#fff; color:#555; font-size:1.4rem; font-family: Verdana, Arial, Helvetica, sans-serif; }
+td,th,caption { font-size:1.4rem; }
+h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%; }
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
+a {color:#555;text-decoration:none; }
+a:hover { text-decoration:none; }
+img { border:none; }
+ol,ul,li { list-style:none; }
+input, textarea, select, button { font:1.4rem Verdana,Helvetica,Arial,sans-serif; }
+table { border-collapse:collapse; }
+html {overflow-y: scroll;}
+/* css common */
+.clearfix:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
+.clearfix { *zoom:1; }
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+.cf{
+    overflow:hidden}
+
+.left{
+    float:left}
+.right{
+    float:right;}
+.md{
+    margin:0 auto}
+.reminder_box{
+    background: #ccc;
+    height: 50px;
+    padding: 0 21px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 24px;
+    position: fixed;
+    z-index: 40;
+    left: 43%;
+    top: 45%;
+}
+.bg{
+	position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background: #000;
+    left: 0;
+    top: 0;
+    opacity: 0.5;
+    filter:alpha(opacity=50);
+}
+.page_box{
+    height: 32px;
+    margin-top:15px;
+    float: right;
+    margin-right: 6px;
+}
+.page_box li{
+    float: left;
+    background: #ebebeb;
+    color: #888;
+    text-align: center;
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    padding: 0px 9px;
+    box-sizing: content-box;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.page_box li.index{
+    background: #FF9C30;
+    color: #fff;
+}
+.img_cover_change{
+    font-size: 14px;
+    text-decoration: underline;
+    color: #267cb7;
+    position: relative;
+    top: -6px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+#cke_111_fileInput_input{
+	outline: none;
+}

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanhe.college.dao.FavoriteMapper" >
+  <resultMap id="BaseResultMap" type="com.hanhe.college.entity.Favorite" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="article_id" property="articleId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, course_id, article_id, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from college_favorite
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from college_favorite
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hanhe.college.entity.Favorite" >
+    insert into college_favorite (id, user_id, course_id, 
+      article_id, create_time)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT}, 
+      #{articleId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanhe.college.entity.Favorite" >
+    insert into college_favorite
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanhe.college.entity.Favorite" >
+    update college_favorite
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="articleId != null" >
+        article_id = #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanhe.college.entity.Favorite" >
+    update college_favorite
+    set user_id = #{userId,jdbcType=BIGINT},
+      course_id = #{courseId,jdbcType=BIGINT},
+      article_id = #{articleId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="count" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM  college_favorite
+    WHERE user_id = #{userId}
+    <if test="courseId != null" >
+      AND course_id = #{courseId}
+    </if>
+    <if test="articleId != null" >
+      AND article_id = #{articleId}
+    </if>
+  </select>
+  <delete id="cancelCourseFavorite">
+    DELETE FROM college_favorite
+    WHERE user_id =#{userId} AND course_id = #{courseId}
+  </delete>
+  <delete id="cancelArticleFavorite">
+    DELETE FROM college_favorite
+    WHERE user_id =#{userId} AND article_id = #{articleId}
+  </delete>
+  <resultMap id="courseMap" type="com.hanhe.college.entity.Course">
+    <id column="c_id" property="id" jdbcType="BIGINT" />
+    <result column="c_title" property="title" jdbcType="VARCHAR" />
+    <result column="c_study_size" property="studySize" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="articleMap" type="com.hanhe.college.entity.Article">
+    <id column="a_id" property="id" jdbcType="BIGINT" />
+    <result column="a_title" property="title" jdbcType="VARCHAR" />
+    <result column="a_cover_img" property="coverImg" jdbcType="VARCHAR" />
+    <result column="a_read_size" property="readSize" jdbcType="INTEGER" />
+    <result column="a_create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <select id="myFavoriteCourses" resultMap="courseMap" parameterType="long">
+    SELECT c.id AS c_id, c.title AS c_title, c.study_size AS c_study_size
+    FROM college_favorite f
+    JOIN college_course c ON (f.course_id = c.id)
+    WHERE f.user_id = #{userId} AND c.state = 1
+    ORDER BY f.create_time DESC
+  </select>
+  <select id="myFavoriteArticles" resultMap="articleMap" parameterType="long">
+    SELECT a.id AS a_id, a.title AS a_title, a.cover_img AS a_cover_img, a.read_size AS a_read_size, a.create_time AS a_create_time
+    FROM college_favorite f
+    JOIN college_article a ON (f.article_id = a.id)
+    WHERE f.user_id = #{userId}
+    ORDER BY f.create_time DESC
+  </select>
+</mapper>

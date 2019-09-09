@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanhe.college.dao.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.hanhe.college.entity.Course" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="admin_id" property="adminId" jdbcType="BIGINT" />
+    <result column="course_category_id" property="courseCategoryId" jdbcType="BIGINT" />
+    <result column="course_category" property="courseCategory" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="study_size" property="studySize" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, admin_id, course_category_id, course_category, title, content, study_size, state, 
+    create_time, operator, operate_time, operate_ip
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from college_course
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from college_course
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hanhe.college.entity.Course" >
+    insert into college_course (id, admin_id, course_category_id, 
+      course_category, title, content, 
+      study_size, state, create_time, 
+      operator, operate_time, operate_ip
+      )
+    values (#{id,jdbcType=BIGINT}, #{adminId,jdbcType=BIGINT}, #{courseCategoryId,jdbcType=BIGINT}, 
+      #{courseCategory,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{studySize,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.hanhe.college.entity.Course" >
+    insert into college_course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="courseCategoryId != null" >
+        course_category_id,
+      </if>
+      <if test="courseCategory != null" >
+        course_category,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="studySize != null" >
+        study_size,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="operateIp != null" >
+        operate_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="courseCategoryId != null" >
+        #{courseCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="courseCategory != null" >
+        #{courseCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="studySize != null" >
+        #{studySize,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null" >
+        #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanhe.college.entity.Course" >
+    update college_course
+    <set >
+      <if test="adminId != null" >
+        admin_id = #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="courseCategoryId != null" >
+        course_category_id = #{courseCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="courseCategory != null" >
+        course_category = #{courseCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="studySize != null" >
+        study_size = #{studySize,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null" >
+        operate_ip = #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanhe.college.entity.Course" >
+    update college_course
+    set admin_id = #{adminId,jdbcType=BIGINT},
+      course_category_id = #{courseCategoryId,jdbcType=BIGINT},
+      course_category = #{courseCategory,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      study_size = #{studySize,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{operateIp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="CourseDTOMap" type="com.hanhe.college.dto.CourseDTO" extends="BaseResultMap">
+    <result column="user_type_id" property="userTypeId" jdbcType="BIGINT" />
+    <result column="uav_type_id" property="uavTypeId" jdbcType="BIGINT" />
+    <result column="user_type_name" property="userTypeName" jdbcType="VARCHAR" />
+    <result column="uav_type_name" property="uavTypeName" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="list" resultMap="CourseDTOMap">
+    SELECT c.id, c.course_category_id, c.course_category, c.title, c.content, c.state, c.create_time, c.operator, c.operate_time,
+    cc.user_type_id, cc.uav_type_id, ut.name as user_type_name, uavt.name as uav_type_name
+    FROM college_course c
+    JOIN college_course_category cc ON c.course_category_id = cc.id
+    JOIN college_user_type ut ON cc.user_type_id = ut.id
+    JOIN college_uav_type uavt ON cc.uav_type_id = uavt.id
+    WHERE c.state = 1
+    <if test="userTypeId != null and userTypeId != 0">
+      AND cc.user_type_id = #{userTypeId}
+    </if>
+    <if test="uavTypeId != null and uavTypeId != 0">
+      AND cc.uav_type_id = #{uavTypeId}
+    </if>
+    <if test="courseCategoryId != null and courseCategoryId != 0" >
+      AND c.course_category_id = #{courseCategoryId}
+    </if>
+  </select>
+  <select id="countByName" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM  college_course
+    WHERE title = #{title} AND course_category_id = #{courseCategoryId}
+    <if test="id != null" >
+      AND id != #{id}
+    </if>
+  </select>
+  <select id="getByCategoryId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM college_course
+    WHERE state = 1 AND course_category_id = #{courseCategoryId}
+    ORDER BY id ASC
+  </select>
+  <update id="increaseStudySize">
+    UPDATE college_course
+    SET study_size = study_size + 1
+    WHERE id = #{id}
+  </update>
+  <select id="isExist" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM  college_course
+    WHERE state = 1 AND course_category_id = #{courseCategoryId}
+  </select>
+</mapper>

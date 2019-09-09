@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanhe.college.dao.VideoMapper" >
+  <resultMap id="BaseResultMap" type="com.hanhe.college.entity.Video" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="admin_id" property="adminId" jdbcType="BIGINT" />
+    <result column="uav_type_id" property="uavTypeId" jdbcType="BIGINT" />
+    <result column="uav_type" property="uavType" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="image_src" property="imageSrc" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="read_size" property="readSize" jdbcType="INTEGER" />
+    <result column="seq" property="seq" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, admin_id, uav_type_id, uav_type, name, video_url, image, image_src, introduction, 
+    read_size, seq, state, create_time, operator, operate_time, operate_ip
+  </sql>
+  <sql id="Base_Column_List_Without_Introduction" >
+    id, admin_id, uav_type_id, uav_type, name, video_url, image, read_size, seq, state, create_time, operator, operate_time, operate_ip
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from college_video
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from college_video
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hanhe.college.entity.Video" >
+    insert into college_video (id, admin_id, uav_type_id, 
+      uav_type, name, video_url, 
+      image, image_src, introduction, 
+      read_size, seq, state, 
+      create_time, operator, operate_time, 
+      operate_ip)
+    values (#{id,jdbcType=BIGINT}, #{adminId,jdbcType=BIGINT}, #{uavTypeId,jdbcType=BIGINT}, 
+      #{uavType,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{videoUrl,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{imageSrc,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
+      #{readSize,jdbcType=INTEGER}, #{seq,jdbcType=BIGINT}, #{state,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, 
+      #{operateIp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.hanhe.college.entity.Video" >
+    insert into college_video
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="uavTypeId != null" >
+        uav_type_id,
+      </if>
+      <if test="uavType != null" >
+        uav_type,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="videoUrl != null" >
+        video_url,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="imageSrc != null" >
+        image_src,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="readSize != null" >
+        read_size,
+      </if>
+      <if test="seq != null" >
+        seq,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="operateIp != null" >
+        operate_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="uavTypeId != null" >
+        #{uavTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="uavType != null" >
+        #{uavType,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUrl != null" >
+        #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="imageSrc != null" >
+        #{imageSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="readSize != null" >
+        #{readSize,jdbcType=INTEGER},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null" >
+        #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanhe.college.entity.Video" >
+    update college_video
+    <set >
+      <if test="adminId != null" >
+        admin_id = #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="uavTypeId != null" >
+        uav_type_id = #{uavTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="uavType != null" >
+        uav_type = #{uavType,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUrl != null" >
+        video_url = #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="imageSrc != null" >
+        image_src = #{imageSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="readSize != null" >
+        read_size = #{readSize,jdbcType=INTEGER},
+      </if>
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null" >
+        operate_ip = #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanhe.college.entity.Video" >
+    update college_video
+    set admin_id = #{adminId,jdbcType=BIGINT},
+      uav_type_id = #{uavTypeId,jdbcType=BIGINT},
+      uav_type = #{uavType,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      video_url = #{videoUrl,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      image_src = #{imageSrc,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      read_size = #{readSize,jdbcType=INTEGER},
+      seq = #{seq,jdbcType=BIGINT},
+      state = #{state,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{operateIp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="list" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List_Without_Introduction" />
+    FROM college_video
+    WHERE state = 1
+    <if test="uavTypeId != null and uavTypeId != 0" >
+      AND uav_type_id = #{uavTypeId}
+    </if>
+    ORDER BY seq ASC
+  </select>
+  <select id="isExist" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM  college_video
+    WHERE state = 1 AND uav_type_id = #{uavTypeId,jdbcType=BIGINT}
+  </select>
+  <update id="increaseReadSize">
+    UPDATE college_video
+    SET read_size = read_size + 1
+    WHERE id = #{id}
+  </update>
+  <select id="selectByKeyword" resultMap="BaseResultMap">
+    SELECT
+    id, name, video_url, image,  read_size, create_time
+    FROM college_video
+    WHERE state = 1 AND name LIKE CONCAT('%',#{keyword},'%')
+    ORDER BY seq ASC
+  </select>
+</mapper>

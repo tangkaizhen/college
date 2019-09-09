@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanhe.college.dao.ExamResultMapper" >
+  <resultMap id="BaseResultMap" type="com.hanhe.college.entity.ExamResult" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_type_id" property="userTypeId" jdbcType="BIGINT" />
+    <result column="uav_type_id" property="uavTypeId" jdbcType="BIGINT" />
+    <result column="exam_id" property="examId" jdbcType="BIGINT" />
+    <result column="exam_paper_id" property="examPaperId" jdbcType="BIGINT" />
+    <result column="course_category_id" property="courseCategoryId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="cost_time" property="costTime" jdbcType="INTEGER" />
+    <result column="total_num" property="totalNum" jdbcType="INTEGER" />
+    <result column="pass_num" property="passNum" jdbcType="INTEGER" />
+    <result column="fail_num" property="failNum" jdbcType="INTEGER" />
+    <result column="none_num" property="noneNum" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="unpass_questions" property="unpassQuestions" jdbcType="VARCHAR" />
+    <result column="success" property="success" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, user_type_id, uav_type_id, exam_id, exam_paper_id, course_category_id, 
+    type, cost_time, total_num, pass_num, fail_num, none_num, score, unpass_questions, 
+    success, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from college_exam_result
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from college_exam_result
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hanhe.college.entity.ExamResult" >
+    insert into college_exam_result (id, user_id, user_type_id, 
+      uav_type_id, exam_id, exam_paper_id, 
+      course_category_id, type, cost_time, 
+      total_num, pass_num, fail_num, 
+      none_num, score, unpass_questions, 
+      success, create_time)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userTypeId,jdbcType=BIGINT}, 
+      #{uavTypeId,jdbcType=BIGINT}, #{examId,jdbcType=BIGINT}, #{examPaperId,jdbcType=BIGINT}, 
+      #{courseCategoryId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{costTime,jdbcType=INTEGER}, 
+      #{totalNum,jdbcType=INTEGER}, #{passNum,jdbcType=INTEGER}, #{failNum,jdbcType=INTEGER}, 
+      #{noneNum,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{unpassQuestions,jdbcType=VARCHAR}, 
+      #{success,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.hanhe.college.entity.ExamResult" >
+    insert into college_exam_result
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userTypeId != null" >
+        user_type_id,
+      </if>
+      <if test="uavTypeId != null" >
+        uav_type_id,
+      </if>
+      <if test="examId != null" >
+        exam_id,
+      </if>
+      <if test="examPaperId != null" >
+        exam_paper_id,
+      </if>
+      <if test="courseCategoryId != null" >
+        course_category_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="costTime != null" >
+        cost_time,
+      </if>
+      <if test="totalNum != null" >
+        total_num,
+      </if>
+      <if test="passNum != null" >
+        pass_num,
+      </if>
+      <if test="failNum != null" >
+        fail_num,
+      </if>
+      <if test="noneNum != null" >
+        none_num,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="unpassQuestions != null" >
+        unpass_questions,
+      </if>
+      <if test="success != null" >
+        success,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userTypeId != null" >
+        #{userTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="uavTypeId != null" >
+        #{uavTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="examId != null" >
+        #{examId,jdbcType=BIGINT},
+      </if>
+      <if test="examPaperId != null" >
+        #{examPaperId,jdbcType=BIGINT},
+      </if>
+      <if test="courseCategoryId != null" >
+        #{courseCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="costTime != null" >
+        #{costTime,jdbcType=INTEGER},
+      </if>
+      <if test="totalNum != null" >
+        #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="passNum != null" >
+        #{passNum,jdbcType=INTEGER},
+      </if>
+      <if test="failNum != null" >
+        #{failNum,jdbcType=INTEGER},
+      </if>
+      <if test="noneNum != null" >
+        #{noneNum,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="unpassQuestions != null" >
+        #{unpassQuestions,jdbcType=VARCHAR},
+      </if>
+      <if test="success != null" >
+        #{success,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanhe.college.entity.ExamResult" >
+    update college_exam_result
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userTypeId != null" >
+        user_type_id = #{userTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="uavTypeId != null" >
+        uav_type_id = #{uavTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="examId != null" >
+        exam_id = #{examId,jdbcType=BIGINT},
+      </if>
+      <if test="examPaperId != null" >
+        exam_paper_id = #{examPaperId,jdbcType=BIGINT},
+      </if>
+      <if test="courseCategoryId != null" >
+        course_category_id = #{courseCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="costTime != null" >
+        cost_time = #{costTime,jdbcType=INTEGER},
+      </if>
+      <if test="totalNum != null" >
+        total_num = #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="passNum != null" >
+        pass_num = #{passNum,jdbcType=INTEGER},
+      </if>
+      <if test="failNum != null" >
+        fail_num = #{failNum,jdbcType=INTEGER},
+      </if>
+      <if test="noneNum != null" >
+        none_num = #{noneNum,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="unpassQuestions != null" >
+        unpass_questions = #{unpassQuestions,jdbcType=VARCHAR},
+      </if>
+      <if test="success != null" >
+        success = #{success,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanhe.college.entity.ExamResult" >
+    update college_exam_result
+    set user_id = #{userId,jdbcType=BIGINT},
+      user_type_id = #{userTypeId,jdbcType=BIGINT},
+      uav_type_id = #{uavTypeId,jdbcType=BIGINT},
+      exam_id = #{examId,jdbcType=BIGINT},
+      exam_paper_id = #{examPaperId,jdbcType=BIGINT},
+      course_category_id = #{courseCategoryId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      cost_time = #{costTime,jdbcType=INTEGER},
+      total_num = #{totalNum,jdbcType=INTEGER},
+      pass_num = #{passNum,jdbcType=INTEGER},
+      fail_num = #{failNum,jdbcType=INTEGER},
+      none_num = #{noneNum,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      unpass_questions = #{unpassQuestions,jdbcType=VARCHAR},
+      success = #{success,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="count" resultType="int">
+    SELECT count(1)
+    FROM  college_exam_result
+    WHERE type = #{type} AND user_id = #{userId} AND success = 1
+    <if test="userTypeId != null" >
+     AND user_type_id = #{userTypeId}
+    </if>
+    <if test="uavTypeId != null" >
+     AND uav_type_id = #{uavTypeId} 
+    </if>
+  </select>
+  <select id="getResults" resultMap="BaseResultMap">
+    SELECT user_type_id, uav_type_id, course_category_id
+    FROM college_exam_result
+    WHERE type = 1 AND success = 1 AND user_id = #{userId} AND user_type_id = #{userTypeId} AND uav_type_id = #{uavTypeId}
+    GROUP BY course_category_id
+  </select>
+  <select id="getResults4Users" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM college_exam_result
+    WHERE type = 2 AND user_id IN (${userIds})
+    ORDER BY user_id ASC, create_time DESC
+  </select>
+</mapper>

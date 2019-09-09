@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+            http://www.springframework.org/schema/security
+            http://www.springframework.org/schema/security/spring-security-4.1.xsd">
+
+    <security:http pattern="/admin/login.page" security="none"/>
+
+    <!--  Spring-Security 的配置 -->
+    <security:http auto-config="true" use-expressions="true" entry-point-ref="collegeAuthenticationEntryPoint">
+        <security:form-login login-page="/admin/login.page" username-parameter="username" password-parameter="password"
+                             login-processing-url="/admin/login"
+                             authentication-failure-url="/admin/login.page?error=true"
+                             default-target-url="/admin/home.page"/>
+        <security:logout logout-url="/admin/logout" logout-success-url="/admin/login.page"/>
+
+
+        <security:intercept-url pattern="/admin/knowledge/expert/**" access="hasAnyRole('ROLE_ADMIN','ROLE_KNOWLEDGE','ROLE_EXPERT')"/>
+        <security:intercept-url pattern="/admin/knowledge/**" access="hasAnyRole('ROLE_ADMIN','ROLE_KNOWLEDGE')"/>
+        <security:intercept-url pattern="/admin/course/**" access="hasAnyRole('ROLE_ADMIN','ROLE_COURSE')"/>
+        <security:intercept-url pattern="/admin/exam/**" access="hasAnyRole('ROLE_ADMIN','ROLE_EXAM')"/>
+        <security:intercept-url pattern="/admin/training/site/**" access="hasAnyRole('ROLE_ADMIN','ROLE_TRAINING','ROLE_TRAINING_SITE')"/>
+        <security:intercept-url pattern="/admin/training/**" access="hasAnyRole('ROLE_ADMIN','ROLE_TRAINING')"/>
+        <security:intercept-url pattern="/admin/qa/expert/**" access="hasAnyRole('ROLE_ADMIN','ROLE_QA','ROLE_EXPERT')"/>
+        <security:intercept-url pattern="/admin/qa/**" access="hasAnyRole('ROLE_ADMIN','ROLE_QA')"/>
+        <security:intercept-url pattern="/admin/user/site/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_TRAINING_SITE')"/>
+        <security:intercept-url pattern="/admin/user/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+        <security:intercept-url pattern="/admin/config/**" access="hasAnyRole('ROLE_ADMIN','ROLE_CONFIG')"/>
+
+        <security:access-denied-handler  ref="collegeAccessDeniedHandler" />
+        <security:csrf disabled="true"/>
+
+        <security:headers>
+            <security:frame-options  policy="SAMEORIGIN"></security:frame-options>
+        </security:headers>
+    </security:http>
+
+    <!-- 指定一个自定义的authentication-manager :customUserDetailsService -->
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="customUserDetailsService">
+            <security:password-encoder ref="passwordEncoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <!-- 对密码进行MD5编码 -->
+    <bean class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" id="passwordEncoder"/>
+
+    <bean id="customUserDetailsService" class="com.hanhe.college.security.CollegeUserDetailsService"/>
+    <bean id="collegeAccessDeniedHandler" class="com.hanhe.college.security.CollegeAccessDeniedHandler"/>
+    <bean id="collegeAuthenticationEntryPoint" class="com.hanhe.college.security.CollegeAuthenticationEntryPoint"/>
+
+</beans>

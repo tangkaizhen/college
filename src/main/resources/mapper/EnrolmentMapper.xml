@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanhe.college.dao.EnrolmentMapper" >
+  <resultMap id="BaseResultMap" type="com.hanhe.college.entity.Enrolment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="training_site_id" property="trainingSiteId" jdbcType="BIGINT" />
+    <result column="training_type_id" property="trainingTypeId" jdbcType="BIGINT" />
+    <result column="training_type" property="trainingType" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="spare" property="spare" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, training_site_id, training_type_id, training_type, name, phone, spare, 
+    state, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from college_enrolment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from college_enrolment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hanhe.college.entity.Enrolment" >
+    insert into college_enrolment (id, user_id, training_site_id, 
+      training_type_id, training_type, name, 
+      phone, spare, state, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{trainingSiteId,jdbcType=BIGINT}, 
+      #{trainingTypeId,jdbcType=BIGINT}, #{trainingType,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{spare,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.hanhe.college.entity.Enrolment" >
+    insert into college_enrolment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="trainingSiteId != null" >
+        training_site_id,
+      </if>
+      <if test="trainingTypeId != null" >
+        training_type_id,
+      </if>
+      <if test="trainingType != null" >
+        training_type,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="spare != null" >
+        spare,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="trainingSiteId != null" >
+        #{trainingSiteId,jdbcType=BIGINT},
+      </if>
+      <if test="trainingTypeId != null" >
+        #{trainingTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="trainingType != null" >
+        #{trainingType,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="spare != null" >
+        #{spare,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanhe.college.entity.Enrolment" >
+    update college_enrolment
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="trainingSiteId != null" >
+        training_site_id = #{trainingSiteId,jdbcType=BIGINT},
+      </if>
+      <if test="trainingTypeId != null" >
+        training_type_id = #{trainingTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="trainingType != null" >
+        training_type = #{trainingType,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="spare != null" >
+        spare = #{spare,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanhe.college.entity.Enrolment" >
+    update college_enrolment
+    set user_id = #{userId,jdbcType=BIGINT},
+      training_site_id = #{trainingSiteId,jdbcType=BIGINT},
+      training_type_id = #{trainingTypeId,jdbcType=BIGINT},
+      training_type = #{trainingType,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      spare = #{spare,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="isExist" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM  college_enrolment
+    WHERE user_id = #{userId} AND training_type_id = #{trainingTypeId} AND state = 1
+  </select>
+  <select id="getEnrolments" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM college_enrolment
+    WHERE user_id = #{userId}
+    ORDER BY create_time DESC
+  </select>
+  <resultMap id="EnrolmentDTOMap" type="com.hanhe.college.dto.EnrolmentDTO" extends="BaseResultMap">
+    <association column="training_site_id" property="trainingSite" javaType="com.hanhe.college.entity.TrainingSite">
+      <id column="ts_id" property="id" jdbcType="BIGINT" />
+      <result column="ts_name" property="name" jdbcType="VARCHAR" />
+      <result column="ts_province" property="province" jdbcType="VARCHAR" />
+      <result column="ts_city" property="city" jdbcType="VARCHAR" />
+      <result column="ts_district" property="district" jdbcType="VARCHAR" />
+      <result column="ts_address" property="address" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  <select id="list" resultMap="EnrolmentDTOMap">
+    SELECT
+    e.id, e.user_id, e.training_site_id, e.training_type, e.name, e.phone, e.spare, e.create_time,
+    ts.id AS ts_id, ts.name AS ts_name, ts.province AS ts_province, ts.city AS ts_city, ts.district AS ts_district, ts.address AS ts_address
+    FROM college_enrolment e
+    JOIN college_training_site ts ON (e.training_site_id = ts.id)
+    WHERE e.state = 1
+    <if test="trainingSiteId != null" >
+      AND e.training_site_id = #{trainingSiteId}
+    </if>
+    <if test="province != null and province != ''">
+      AND ts.province = #{province}
+    </if>
+    ORDER BY e.create_time DESC
+  </select>
+    <select id="isAvailable" resultType="java.lang.Integer">
+      SELECT count(1)
+      FROM college_enrolment
+      WHERE state = 1 AND user_id = #{userId} AND training_site_id = #{trainingSiteId}
+    </select>
+</mapper>

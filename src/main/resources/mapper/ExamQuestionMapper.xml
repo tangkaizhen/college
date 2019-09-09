@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanhe.college.dao.ExamQuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.hanhe.college.entity.ExamQuestion" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_type_id" property="userTypeId" jdbcType="BIGINT" />
+    <result column="uav_type_id" property="uavTypeId" jdbcType="BIGINT" />
+    <result column="course_category_id" property="courseCategoryId" jdbcType="BIGINT" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
+    <result column="uav_type" property="uavType" jdbcType="VARCHAR" />
+    <result column="course_category" property="courseCategory" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="question" property="question" jdbcType="VARCHAR" />
+    <result column="option1" property="option1" jdbcType="VARCHAR" />
+    <result column="option2" property="option2" jdbcType="VARCHAR" />
+    <result column="option3" property="option3" jdbcType="VARCHAR" />
+    <result column="option4" property="option4" jdbcType="VARCHAR" />
+    <result column="answer" property="answer" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_type_id, uav_type_id, course_category_id, user_type, uav_type, course_category, 
+    type, question, option1, option2, option3, option4, answer, state, operator, operate_time, 
+    operate_ip
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from college_exam_question
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from college_exam_question
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hanhe.college.entity.ExamQuestion" >
+    insert into college_exam_question (id, user_type_id, uav_type_id, 
+      course_category_id, user_type, uav_type, 
+      course_category, type, question, 
+      option1, option2, option3, 
+      option4, answer, state, 
+      operator, operate_time, operate_ip
+      )
+    values (#{id,jdbcType=BIGINT}, #{userTypeId,jdbcType=BIGINT}, #{uavTypeId,jdbcType=BIGINT}, 
+      #{courseCategoryId,jdbcType=BIGINT}, #{userType,jdbcType=VARCHAR}, #{uavType,jdbcType=VARCHAR}, 
+      #{courseCategory,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{question,jdbcType=VARCHAR}, 
+      #{option1,jdbcType=VARCHAR}, #{option2,jdbcType=VARCHAR}, #{option3,jdbcType=VARCHAR}, 
+      #{option4,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.hanhe.college.entity.ExamQuestion" >
+    insert into college_exam_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userTypeId != null" >
+        user_type_id,
+      </if>
+      <if test="uavTypeId != null" >
+        uav_type_id,
+      </if>
+      <if test="courseCategoryId != null" >
+        course_category_id,
+      </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
+      <if test="uavType != null" >
+        uav_type,
+      </if>
+      <if test="courseCategory != null" >
+        course_category,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="question != null" >
+        question,
+      </if>
+      <if test="option1 != null" >
+        option1,
+      </if>
+      <if test="option2 != null" >
+        option2,
+      </if>
+      <if test="option3 != null" >
+        option3,
+      </if>
+      <if test="option4 != null" >
+        option4,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="operateIp != null" >
+        operate_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userTypeId != null" >
+        #{userTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="uavTypeId != null" >
+        #{uavTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="courseCategoryId != null" >
+        #{courseCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="uavType != null" >
+        #{uavType,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCategory != null" >
+        #{courseCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="question != null" >
+        #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="option1 != null" >
+        #{option1,jdbcType=VARCHAR},
+      </if>
+      <if test="option2 != null" >
+        #{option2,jdbcType=VARCHAR},
+      </if>
+      <if test="option3 != null" >
+        #{option3,jdbcType=VARCHAR},
+      </if>
+      <if test="option4 != null" >
+        #{option4,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null" >
+        #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanhe.college.entity.ExamQuestion" >
+    update college_exam_question
+    <set >
+      <if test="userTypeId != null" >
+        user_type_id = #{userTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="uavTypeId != null" >
+        uav_type_id = #{uavTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="courseCategoryId != null" >
+        course_category_id = #{courseCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="userType != null" >
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="uavType != null" >
+        uav_type = #{uavType,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCategory != null" >
+        course_category = #{courseCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="question != null" >
+        question = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="option1 != null" >
+        option1 = #{option1,jdbcType=VARCHAR},
+      </if>
+      <if test="option2 != null" >
+        option2 = #{option2,jdbcType=VARCHAR},
+      </if>
+      <if test="option3 != null" >
+        option3 = #{option3,jdbcType=VARCHAR},
+      </if>
+      <if test="option4 != null" >
+        option4 = #{option4,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null" >
+        operate_ip = #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanhe.college.entity.ExamQuestion" >
+    update college_exam_question
+    set user_type_id = #{userTypeId,jdbcType=BIGINT},
+      uav_type_id = #{uavTypeId,jdbcType=BIGINT},
+      course_category_id = #{courseCategoryId,jdbcType=BIGINT},
+      user_type = #{userType,jdbcType=VARCHAR},
+      uav_type = #{uavType,jdbcType=VARCHAR},
+      course_category = #{courseCategory,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      question = #{question,jdbcType=VARCHAR},
+      option1 = #{option1,jdbcType=VARCHAR},
+      option2 = #{option2,jdbcType=VARCHAR},
+      option3 = #{option3,jdbcType=VARCHAR},
+      option4 = #{option4,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      operator = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{operateIp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="list" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM college_exam_question
+    WHERE state = 1
+    <if test="type != null and type != 0" >
+      AND type = #{type}
+    </if>
+    <if test="userTypeId != null and userTypeId != 0" >
+      AND user_type_id = #{userTypeId}
+    </if>
+    <if test="uavTypeId != null and uavTypeId != 0" >
+      AND uav_type_id = #{uavTypeId}
+    </if>
+    <if test="courseCategoryId != null and courseCategoryId != 0" >
+      AND course_category_id = #{courseCategoryId}
+    </if>
+    ORDER BY operate_time DESC
+  </select>
+  <insert id="batchInsert" parameterType="map">
+    insert into college_exam_question(user_type_id, uav_type_id,course_category_id,
+    user_type, uav_type, course_category, type, question,option1, option2, option3,
+    option4, answer, state,operator, operate_time, operate_ip)
+    values
+    <foreach collection="examQuestionList" item="examQuestion" separator=",">
+      (#{examQuestion.userTypeId}, #{examQuestion.uavTypeId},#{examQuestion.courseCategoryId},
+      #{examQuestion.userType}, #{examQuestion.uavType}, #{examQuestion.courseCategory},
+      #{examQuestion.type}, #{examQuestion.question}, #{examQuestion.option1}, #{examQuestion.option2},
+      #{examQuestion.option3},#{examQuestion.option4}, #{examQuestion.answer}, #{examQuestion.state},
+      #{examQuestion.operator}, #{examQuestion.operateTime}, #{examQuestion.operateIp})
+    </foreach>
+  </insert>
+  <select id="isExist" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM  college_exam_question
+    WHERE state = 1
+    <if test="userTypeId != null and userTypeId != 0" >
+      AND user_type_id = #{userTypeId}
+    </if>
+    <if test="uavTypeId != null and uavTypeId != 0" >
+      AND uav_type_id = #{uavTypeId}
+    </if>
+    <if test="courseCategoryId != null and courseCategoryId != 0" >
+      AND course_category_id = #{courseCategoryId}
+    </if>
+  </select>
+</mapper>

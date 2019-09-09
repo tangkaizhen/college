@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanhe.college.dao.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.hanhe.college.entity.Comment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="article_id" property="articleId" jdbcType="BIGINT" />
+    <result column="expert_id" property="expertId" jdbcType="BIGINT" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="reply_admin_id" property="replyAdminId" jdbcType="BIGINT" />
+    <result column="reply_content" property="replyContent" jdbcType="VARCHAR" />
+    <result column="reply_time" property="replyTime" jdbcType="TIMESTAMP" />
+    <result column="reply_flag" property="replyFlag" jdbcType="BIT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="reply_name" property="replyName" jdbcType="VARCHAR" />
+    <result column="vote_size" property="voteSize" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, article_id, expert_id, comment, image, reply_admin_id, reply_content, 
+    reply_time, reply_flag, user_name, reply_name, vote_size, state, create_time, operator, 
+    operate_time, operate_ip
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from college_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from college_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hanhe.college.entity.Comment" >
+    insert into college_comment (id, user_id, article_id, 
+      expert_id, comment, image, 
+      reply_admin_id, reply_content, reply_time, 
+      reply_flag, user_name, reply_name, 
+      vote_size, state, create_time, 
+      operator, operate_time, operate_ip
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{articleId,jdbcType=BIGINT}, 
+      #{expertId,jdbcType=BIGINT}, #{comment,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{replyAdminId,jdbcType=BIGINT}, #{replyContent,jdbcType=VARCHAR}, #{replyTime,jdbcType=TIMESTAMP}, 
+      #{replyFlag,jdbcType=BIT}, #{userName,jdbcType=VARCHAR}, #{replyName,jdbcType=VARCHAR}, 
+      #{voteSize,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.hanhe.college.entity.Comment" >
+    insert into college_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="expertId != null" >
+        expert_id,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="replyAdminId != null" >
+        reply_admin_id,
+      </if>
+      <if test="replyContent != null" >
+        reply_content,
+      </if>
+      <if test="replyTime != null" >
+        reply_time,
+      </if>
+      <if test="replyFlag != null" >
+        reply_flag,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="replyName != null" >
+        reply_name,
+      </if>
+      <if test="voteSize != null" >
+        vote_size,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="operateIp != null" >
+        operate_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="expertId != null" >
+        #{expertId,jdbcType=BIGINT},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="replyAdminId != null" >
+        #{replyAdminId,jdbcType=BIGINT},
+      </if>
+      <if test="replyContent != null" >
+        #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null" >
+        #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyFlag != null" >
+        #{replyFlag,jdbcType=BIT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="replyName != null" >
+        #{replyName,jdbcType=VARCHAR},
+      </if>
+      <if test="voteSize != null" >
+        #{voteSize,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null" >
+        #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanhe.college.entity.Comment" >
+    update college_comment
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="articleId != null" >
+        article_id = #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="expertId != null" >
+        expert_id = #{expertId,jdbcType=BIGINT},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="replyAdminId != null" >
+        reply_admin_id = #{replyAdminId,jdbcType=BIGINT},
+      </if>
+      <if test="replyContent != null" >
+        reply_content = #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null" >
+        reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyFlag != null" >
+        reply_flag = #{replyFlag,jdbcType=BIT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="replyName != null" >
+        reply_name = #{replyName,jdbcType=VARCHAR},
+      </if>
+      <if test="voteSize != null" >
+        vote_size = #{voteSize,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null" >
+        operate_ip = #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanhe.college.entity.Comment" >
+    update college_comment
+    set user_id = #{userId,jdbcType=BIGINT},
+      article_id = #{articleId,jdbcType=BIGINT},
+      expert_id = #{expertId,jdbcType=BIGINT},
+      comment = #{comment,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      reply_admin_id = #{replyAdminId,jdbcType=BIGINT},
+      reply_content = #{replyContent,jdbcType=VARCHAR},
+      reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      reply_flag = #{replyFlag,jdbcType=BIT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      reply_name = #{replyName,jdbcType=VARCHAR},
+      vote_size = #{voteSize,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{operateIp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="CommentDTOMap" type="com.hanhe.college.dto.CommentDTO" extends="BaseResultMap">
+    <result column="agree" property="agree" jdbcType="BIT" />
+    <association column="user_id" property="user" javaType="com.hanhe.college.entity.User">
+      <id column="u_id" property="id" jdbcType="BIGINT" />
+      <result column="u_name" property="name" jdbcType="VARCHAR" />
+      <result column="u_headImg" property="headImg" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  <select id="getByArticleId" resultMap="CommentDTOMap">
+    SELECT
+    c.id, c.user_id, c.comment, c.image, c.reply_content, c.reply_time, c.reply_flag, c.vote_size, c.create_time,
+    u.id AS u_id, u.name AS u_name, u.head_img AS u_headImg, v.id AS agree
+    FROM college_comment c
+    JOIN college_user u ON u.id = c.user_id
+    LEFT JOIN college_vote v ON ( v.comment_id = c.id AND v.user_id = ${userId})
+    WHERE c.state = 2 AND c.article_id = ${articleId}
+    ORDER BY c.vote_size DESC, c.create_time DESC
+  </select>
+  <select id="qaList" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM college_comment
+    WHERE expert_id IS NOT NULL AND state > 0
+    <if test="state != null and state != 0" >
+      AND state = #{state}
+    </if>
+    <if test="replyFlag != null" >
+      AND reply_flag = #{replyFlag}
+    </if>
+    <if test="expertId != null and expertId != 0" >
+      AND expert_id = #{expertId}
+    </if>
+    ORDER BY create_time DESC
+  </select>
+  <select id="commentList" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM college_comment
+    WHERE expert_id IS NULL AND state > 0
+    <if test="state != null and state != 0" >
+      AND state = #{state}
+    </if>
+    <if test="replyFlag != null" >
+      AND reply_flag = #{replyFlag}
+    </if>
+    <if test="adminId != null and adminId != 0" >
+      AND reply_admin_id = #{adminId}
+    </if>
+    ORDER BY create_time DESC
+  </select>
+  <resultMap id="MomentDTOMap" type="com.hanhe.college.dto.MomentDTO">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="reply_content" property="replyContent" jdbcType="VARCHAR" />
+    <result column="user_head_img" property="userHeadImg" jdbcType="VARCHAR" />
+    <result column="expert_head_img" property="expertHeadImg" jdbcType="VARCHAR" />
+    <result column="expert_name" property="expertName" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="moments" resultMap="MomentDTOMap">
+    SELECT 2 AS type, c.id, c.comment, c.reply_content, c.reply_time AS create_time, u.head_img AS user_head_img, a.head_icon AS expert_head_img
+    FROM college_comment c
+    JOIN college_user u ON u.id = c.user_id
+    JOIN college_administrator a ON a.id = c.expert_id
+    WHERE c.expert_id = #{expertId} AND c.reply_flag = 1 AND c.state = 2
+    ORDER BY c.create_time DESC
+  </select>
+  <select id="myQAList" resultMap="MomentDTOMap">
+    SELECT
+      c.id, c.comment, c.reply_content, c.reply_time AS create_time, u.head_img AS user_head_img, a.head_icon AS expert_head_img, c.reply_name AS expert_name
+    FROM college_comment c
+    JOIN college_user u ON u.id = c.user_id
+    JOIN college_administrator a ON a.id = c.expert_id
+    WHERE c.user_id = #{userId} AND c.expert_id IS NOT NULL
+    ORDER BY c.create_time DESC
+  </select>
+</mapper>

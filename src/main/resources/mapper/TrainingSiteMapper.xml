@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanhe.college.dao.TrainingSiteMapper" >
+  <resultMap id="BaseResultMap" type="com.hanhe.college.entity.TrainingSite" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="admin_account" property="adminAccount" jdbcType="VARCHAR" />
+    <result column="class_name" property="className" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="training_type" property="trainingType" jdbcType="VARCHAR" />
+    <result column="training_start_date" property="trainingStartDate" jdbcType="DATE" />
+    <result column="training_end_date" property="trainingEndDate" jdbcType="DATE" />
+    <result column="contact_name_1" property="contactName1" jdbcType="VARCHAR" />
+    <result column="contact_phone_1" property="contactPhone1" jdbcType="VARCHAR" />
+    <result column="contact_name_2" property="contactName2" jdbcType="VARCHAR" />
+    <result column="contact_phone_2" property="contactPhone2" jdbcType="VARCHAR" />
+    <result column="contact_name_3" property="contactName3" jdbcType="VARCHAR" />
+    <result column="contact_phone_3" property="contactPhone3" jdbcType="VARCHAR" />
+    <result column="advantage" property="advantage" jdbcType="VARCHAR" />
+    <result column="training_description" property="trainingDescription" jdbcType="VARCHAR" />
+    <result column="fee_description" property="feeDescription" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, admin_account, class_name, province, city, district, address, training_type, 
+    training_start_date, training_end_date, contact_name_1, contact_phone_1, contact_name_2, 
+    contact_phone_2, contact_name_3, contact_phone_3, advantage, training_description, 
+    fee_description, state, create_time, operator, operate_time, operate_ip
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from college_training_site
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from college_training_site
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hanhe.college.entity.TrainingSite" >
+    insert into college_training_site (id, name, admin_account, 
+      class_name, province, city, 
+      district, address, training_type, 
+      training_start_date, training_end_date, contact_name_1, 
+      contact_phone_1, contact_name_2, contact_phone_2, 
+      contact_name_3, contact_phone_3, advantage, 
+      training_description, fee_description, state, 
+      create_time, operator, operate_time, 
+      operate_ip)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{adminAccount,jdbcType=VARCHAR}, 
+      #{className,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{district,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{trainingType,jdbcType=VARCHAR}, 
+      #{trainingStartDate,jdbcType=DATE}, #{trainingEndDate,jdbcType=DATE}, #{contactName1,jdbcType=VARCHAR}, 
+      #{contactPhone1,jdbcType=VARCHAR}, #{contactName2,jdbcType=VARCHAR}, #{contactPhone2,jdbcType=VARCHAR}, 
+      #{contactName3,jdbcType=VARCHAR}, #{contactPhone3,jdbcType=VARCHAR}, #{advantage,jdbcType=VARCHAR}, 
+      #{trainingDescription,jdbcType=VARCHAR}, #{feeDescription,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, 
+      #{operateIp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.hanhe.college.entity.TrainingSite" >
+    insert into college_training_site
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="adminAccount != null" >
+        admin_account,
+      </if>
+      <if test="className != null" >
+        class_name,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="district != null" >
+        district,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="trainingType != null" >
+        training_type,
+      </if>
+      <if test="trainingStartDate != null" >
+        training_start_date,
+      </if>
+      <if test="trainingEndDate != null" >
+        training_end_date,
+      </if>
+      <if test="contactName1 != null" >
+        contact_name_1,
+      </if>
+      <if test="contactPhone1 != null" >
+        contact_phone_1,
+      </if>
+      <if test="contactName2 != null" >
+        contact_name_2,
+      </if>
+      <if test="contactPhone2 != null" >
+        contact_phone_2,
+      </if>
+      <if test="contactName3 != null" >
+        contact_name_3,
+      </if>
+      <if test="contactPhone3 != null" >
+        contact_phone_3,
+      </if>
+      <if test="advantage != null" >
+        advantage,
+      </if>
+      <if test="trainingDescription != null" >
+        training_description,
+      </if>
+      <if test="feeDescription != null" >
+        fee_description,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="operateIp != null" >
+        operate_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="adminAccount != null" >
+        #{adminAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null" >
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingType != null" >
+        #{trainingType,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingStartDate != null" >
+        #{trainingStartDate,jdbcType=DATE},
+      </if>
+      <if test="trainingEndDate != null" >
+        #{trainingEndDate,jdbcType=DATE},
+      </if>
+      <if test="contactName1 != null" >
+        #{contactName1,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone1 != null" >
+        #{contactPhone1,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName2 != null" >
+        #{contactName2,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone2 != null" >
+        #{contactPhone2,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName3 != null" >
+        #{contactName3,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone3 != null" >
+        #{contactPhone3,jdbcType=VARCHAR},
+      </if>
+      <if test="advantage != null" >
+        #{advantage,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingDescription != null" >
+        #{trainingDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="feeDescription != null" >
+        #{feeDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null" >
+        #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanhe.college.entity.TrainingSite" >
+    update college_training_site
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="adminAccount != null" >
+        admin_account = #{adminAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null" >
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        district = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingType != null" >
+        training_type = #{trainingType,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingStartDate != null" >
+        training_start_date = #{trainingStartDate,jdbcType=DATE},
+      </if>
+      <if test="trainingEndDate != null" >
+        training_end_date = #{trainingEndDate,jdbcType=DATE},
+      </if>
+      <if test="contactName1 != null" >
+        contact_name_1 = #{contactName1,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone1 != null" >
+        contact_phone_1 = #{contactPhone1,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName2 != null" >
+        contact_name_2 = #{contactName2,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone2 != null" >
+        contact_phone_2 = #{contactPhone2,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName3 != null" >
+        contact_name_3 = #{contactName3,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone3 != null" >
+        contact_phone_3 = #{contactPhone3,jdbcType=VARCHAR},
+      </if>
+      <if test="advantage != null" >
+        advantage = #{advantage,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingDescription != null" >
+        training_description = #{trainingDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="feeDescription != null" >
+        fee_description = #{feeDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null" >
+        operate_ip = #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanhe.college.entity.TrainingSite" >
+    update college_training_site
+    set name = #{name,jdbcType=VARCHAR},
+      admin_account = #{adminAccount,jdbcType=VARCHAR},
+      class_name = #{className,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      training_type = #{trainingType,jdbcType=VARCHAR},
+      training_start_date = #{trainingStartDate,jdbcType=DATE},
+      training_end_date = #{trainingEndDate,jdbcType=DATE},
+      contact_name_1 = #{contactName1,jdbcType=VARCHAR},
+      contact_phone_1 = #{contactPhone1,jdbcType=VARCHAR},
+      contact_name_2 = #{contactName2,jdbcType=VARCHAR},
+      contact_phone_2 = #{contactPhone2,jdbcType=VARCHAR},
+      contact_name_3 = #{contactName3,jdbcType=VARCHAR},
+      contact_phone_3 = #{contactPhone3,jdbcType=VARCHAR},
+      advantage = #{advantage,jdbcType=VARCHAR},
+      training_description = #{trainingDescription,jdbcType=VARCHAR},
+      fee_description = #{feeDescription,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{operateIp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="list" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM college_training_site
+    WHERE state = 1
+    <if test="province != null and province !=''" >
+      AND province = #{province,jdbcType=VARCHAR}
+    </if>
+    <if test="trainingType != null and trainingType !=''" >
+      and find_in_set(#{trainingType}, training_type)
+    </if>
+    ORDER BY operate_time DESC
+  </select>
+  <select id="countByName" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM  college_training_site
+    WHERE name = #{name} AND state = 1
+    <if test="id != null" >
+      AND id != #{id}
+    </if>
+  </select>
+   <select id="getByIds" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM college_training_site
+    WHERE id IN (${ids})
+    ORDER BY id ASC
+  </select>
+</mapper>

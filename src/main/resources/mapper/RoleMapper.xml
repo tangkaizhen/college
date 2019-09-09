@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanhe.college.dao.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.hanhe.college.entity.Role" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+    <result column="visible" property="visible" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, role, visible
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from college_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from college_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hanhe.college.entity.Role" >
+    insert into college_role (id, name, role, 
+      visible)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, 
+      #{visible,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanhe.college.entity.Role" >
+    insert into college_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="visible != null" >
+        visible,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="visible != null" >
+        #{visible,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanhe.college.entity.Role" >
+    update college_role
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="visible != null" >
+        visible = #{visible,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanhe.college.entity.Role" >
+    update college_role
+    set name = #{name,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR},
+      visible = #{visible,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getAllRolesByAdminId" resultMap="BaseResultMap">
+    SELECT  r.id, r.name, r.role
+    FROM college_admin_role ar
+    JOIN college_role r ON ar.role_id = r.id
+    WHERE ar.admin_id = #{adminId}
+    ORDER BY r.id ASC
+  </select>
+  <select id="getRolesByAdminId" resultMap="BaseResultMap">
+    SELECT  r.id, r.name, r.role
+    FROM college_admin_role ar
+    JOIN college_role r ON (ar.role_id = r.id AND r.visible = 1)
+    WHERE ar.admin_id = #{adminId}
+    ORDER BY r.id ASC
+  </select>
+  <select id="getAvailable" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from college_role
+    where visible = 1
+    ORDER BY id ASC
+  </select>
+</mapper>
